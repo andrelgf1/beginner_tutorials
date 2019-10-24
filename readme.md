@@ -17,12 +17,10 @@ the subscriber listener will recieve this message.
 
 ### Install ROS kinetic
 
-In order to Install ROS kinect follow the following ROS.org [link]
-(http://wiki.ros.org/kinetic/Installation/Ubuntu)
+In order to Install ROS kinect follow the following ROS.org [link](http://wiki.ros.org/kinetic/Installation/Ubuntu)
 
 ### Install catkin
-In order to Install catkin follow the following ROS.org [link]
-(http://wiki.ros.org/catkin#Installing_catkin)
+In order to Install catkin follow the following ROS.org [link](http://wiki.ros.org/catkin#Installing_catkin)
 
 
 ## How to build
