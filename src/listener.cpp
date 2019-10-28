@@ -1,11 +1,11 @@
-#include "ros/ros.h"
-#include "std_msgs/String.h"
-
 /**
    @copyright 2019  Andre Ferreira
  
  * This tutorial demonstrates simple receipt of messages over the ROS system.
  */
+#include "ros/ros.h"
+#include "std_msgs/String.h"
+
 void chatterCallback(const std_msgs::String::ConstPtr& msg) {
   ROS_INFO("I heard: [%s]", msg->data.c_str());
 }
