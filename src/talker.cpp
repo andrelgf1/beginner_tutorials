@@ -64,7 +64,32 @@ int main(int argc, char **argv) {
   ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
   ros::ServiceServer service = n.advertiseService("changeString", changeString);
 
-  ros::Rate loop_rate(10);
+  int frequency=atoi(argv[1]);
+ 
+  if (frequency !=20){
+        ROS_DEBUG_STREAM("Loop frequency changed to " << frequency);
+	ROS_WARN_STREAM("Loop frequency different from Default");
+    }
+
+  if(frequency<=0){
+     ROS_FATAL_STREAM(argv[1] <<
+ " is a invalid Loop frequency value ,it cannot be smaller then 1 , SYSTEM WILL BE SHUTDOWN");
+     ros::shutdown();
+  }
+
+  if (frequency>300){
+     ROS_ERROR_STREAM("Maximun Loop Frequency allowed in this node is 300, Frequency will be set to Default ");
+     frequency=20;
+     ROS_INFO_STREAM (" LOOP frequency set to "<< frequency);
+     	
+  }
+  
+    ros::Rate loop_rate(frequency);
+  
+  
+  
+
+  
 
   /**
    * A count of how many messages we have sent. This is used to create
@@ -81,7 +106,15 @@ int main(int argc, char **argv) {
     ss <<  baseString << count;
     msg.data = ss.str();
 
-    ROS_INFO("%s", msg.data.c_str());
+    ROS_INFO("%s", msg.data.c_str());  
+    
+    
+    
+	
+    
+    
+    
+    
 
     /**
      * The publish() function is how you send messages. The parameter
