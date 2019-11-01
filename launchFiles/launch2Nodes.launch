@@ -1,0 +1,35 @@
+<launch>
+<arg  name  ="frequency" default = "20" />
+  
+ <node
+
+    name = "publisher"
+
+    pkg = "beginner_tutorials"
+
+    type = "talker"
+
+    output = "screen" 
+            
+    args = "$(arg frequency)"
+    
+
+    
+
+  />
+
+  <node
+
+    name = "subscriber"
+
+    pkg = "beginner_tutorials"
+
+    type = "listener"
+
+    output = "screen"
+
+    launch-prefix = "gnome-terminal -e"
+
+   />
+
+</launch>
