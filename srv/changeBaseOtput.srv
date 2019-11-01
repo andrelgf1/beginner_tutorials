@@ -1,5 +1,5 @@
 #Service Request
-string request
+string stringInput
 ---
 # Service Response
-string response
+string stringOutput
