@@ -5,13 +5,25 @@
 #include <sstream>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include "beginner_tutorials/changeBaseOtput.h"
+#include <variableInitialization.h>
 
 
+
+bool changeString(beginner_tutorials::changeBaseOtput::Request &req,
+
+                  beginner_tutorials::changeBaseOtput::Response &res)
+{
+ res.stringOutput=req.stringInput;
+ baseString=res.stringOutput;
+ return true;
+}
 
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
  */
 int main(int argc, char **argv) {
+   
   /**
    * The ros::init() function needs to see argc and argv so that it can perform
    * any ROS arguments and name remapping that were provided at the command line.
@@ -48,7 +60,9 @@ int main(int argc, char **argv) {
    * than we can send them, the number here specifies how many messages to
    * buffer up before throwing some away.
    */
+  
   ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
+  ros::ServiceServer service = n.advertiseService("changeString", changeString);
 
   ros::Rate loop_rate(10);
 
@@ -64,7 +78,7 @@ int main(int argc, char **argv) {
     std_msgs::String msg;
 
     std::stringstream ss;
-    ss << "Publishing Andre Ferreira " << count;
+    ss <<  baseString << count;
     msg.data = ss.str();
 
     ROS_INFO("%s", msg.data.c_str());
