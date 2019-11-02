@@ -1,29 +1,46 @@
+/**
 
-/** @copyright 2019  Andre Ferreira
+ * @file talker.hpp
+
+ * @brief Publishing node talker.
+
+ * @author Andre Ferreira
+
+ * @copyright  Andre Ferreira
+
+ * Distributed under the BSD License (license terms found in LICENSE or at https://www.freebsd.org/copyright/freebsd-license.html)
+
  */
+
+
 
 #include <sstream>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "beginner_tutorials/changeBaseOtput.h"
-#include <variableInitialization.h>
 
+std::string baseString="Based String without change";
+/**
 
+    * @brief changeString function that changes the publishing node string in the topic 
+     
 
+    * @param beginner_tutorials::changeBaseOtput::Request &req beginner_tutorials::changeBaseOtput::Response &res
+
+    * @return TRUE
+
+    */
 bool changeString(beginner_tutorials::changeBaseOtput::Request &req,
-
-                  beginner_tutorials::changeBaseOtput::Response &res)
-{
- res.stringOutput=req.stringInput;
- baseString=res.stringOutput;
- return true;
+                  beginner_tutorials::changeBaseOtput::Response &res) {
+  res.stringOutput = req.stringInput;
+  baseString = res.stringOutput;  // 13
+  return true;
 }
 
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
  */
 int main(int argc, char **argv) {
-   
   /**
    * The ros::init() function needs to see argc and argv so that it can perform
    * any ROS arguments and name remapping that were provided at the command line.
@@ -60,36 +77,38 @@ int main(int argc, char **argv) {
    * than we can send them, the number here specifies how many messages to
    * buffer up before throwing some away.
    */
-  
-  ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
+
+  ros::Publisher chatter_pub = n.advertise < std_msgs::String
+      > ("chatter", 1000);
+  /// Create and advertise service over ROS 
   ros::ServiceServer service = n.advertiseService("changeString", changeString);
-
-  int frequency=atoi(argv[1]);
- 
-  if (frequency !=20){
-        ROS_DEBUG_STREAM("Loop frequency changed to " << frequency);
-	ROS_WARN_STREAM("Loop frequency different from Default");
-    }
-
-  if(frequency<=0){
-     ROS_FATAL_STREAM(argv[1] <<
- " is a invalid Loop frequency value ,it cannot be smaller then 1 , SYSTEM WILL BE SHUTDOWN");
-     ros::shutdown();
+  /// Create Variable that takes care of loop frequency and initialize to default value
+  int frequency = 20;
+  /// If node stated by the launch file recieves argument and pass to variable 
+  if (argc > 1) {
+    frequency = atoi(argv[1]);
+  }
+  /// If frequency different then default 
+  if (frequency != 20) {
+    ROS_DEBUG_STREAM("Loop frequency changed to " << frequency);
+    ROS_WARN_STREAM("Loop frequency different from Default");
+  }
+  /// if frequency smaller or equal to 0 print shutdown system
+  if (frequency <= 0) {
+    ROS_FATAL_STREAM(
+        argv[1]
+            << " is a invalid Loop frequency value ,it cannot be smaller then 1 , SYSTEM WILL BE SHUTDOWN");
+    ros::shutdown();
+  }
+  ///Maximun loop frequency accepted byt this node is 300
+  if (frequency > 300) {
+    ROS_ERROR_STREAM(
+        "Maximun Loop Frequency allowed in this node is 300, Frequency will be set to Default ");
+    frequency = 20;
+    ROS_INFO_STREAM(" LOOP frequency set to " << frequency);
   }
 
-  if (frequency>300){
-     ROS_ERROR_STREAM("Maximun Loop Frequency allowed in this node is 300, Frequency will be set to Default ");
-     frequency=20;
-     ROS_INFO_STREAM (" LOOP frequency set to "<< frequency);
-     	
-  }
-  
-    ros::Rate loop_rate(frequency);
-  
-  
-  
-
-  
+  ros::Rate loop_rate(frequency);
 
   /**
    * A count of how many messages we have sent. This is used to create
@@ -101,20 +120,10 @@ int main(int argc, char **argv) {
      * This is a message object. You stuff it with data, and then publish it.
      */
     std_msgs::String msg;
-
     std::stringstream ss;
-    ss <<  baseString << count;
+    ss << baseString << count;
     msg.data = ss.str();
-
-    ROS_INFO("%s", msg.data.c_str());  
-    
-    
-    
-	
-    
-    
-    
-    
+    ROS_INFO("%s", msg.data.c_str());
 
     /**
      * The publish() function is how you send messages. The parameter
@@ -130,8 +139,6 @@ int main(int argc, char **argv) {
     ++count;
   }
 
-
   return 0;
 }
-
 
