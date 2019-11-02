@@ -1,10 +1,32 @@
 /**
-   @copyright 2019  Andre Ferreira
- 
- * This tutorial demonstrates simple receipt of messages over the ROS system.
+
+ * @file listener.hpp
+
+ * @brief subscribing node listener.
+
+ * @author Andre Ferreira
+
+ * @copyright  Andre Ferreira
+
+ * Distributed under the BSD License (license terms found in LICENSE or at https://www.freebsd.org/copyright/freebsd-license.html)
+
  */
+
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+
+/**
+
+    * @brief chatterCallback function , Get message from the topic and use in the log message
+    *
+    * Function get string from the topic and prints a log message with string "I Heard "
+    * plus the string took in the topic.
+    *
+    * @param const std_msgs::String::ConstPtr& msg, Is the string published in the topic
+    *
+    * @return none
+    *
+    */
 
 void chatterCallback(const std_msgs::String::ConstPtr& msg) {
   ROS_INFO("I heard: [%s]", msg->data.c_str());
