@@ -1,31 +1,35 @@
 /**
 
+ * Distributed under the BSD License (license terms found in LICENSE or at https://opensource.org/licenses/BSD-2-Clause
+ *
  * @file talker.hpp
-
+ *
  * @brief Publishing node talker.
-
+ *
  * @author Andre Ferreira
-
+ *
  * @copyright  Andre Ferreira
-
- * Distributed under the BSD License (license terms found in LICENSE or at https://www.freebsd.org/copyright/freebsd-license.html)
-
+ *
  */
 
 #include <sstream>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "beginner_tutorials/changeBaseOtput.h"
-
+/// Define string Variable to be published at the topic
 extern std::string baseString = "Based String without change";
 /**
 
- * @brief changeString function that changes the publishing node string in the topic 
- 
+ * @brief changeString service function that changes the publishing node string in the topic 
+ *
+ * Function get request value and set it to response variable and 
+ * the baseString, which is the variable published in the
+ * topic.
+ *
+ * @param beginner_tutorials::changeBaseOtput::Request &req beginner_tutorials::changeBaseOtput::Response &res , that are the request and response from srv file
 
- * @param beginner_tutorials::changeBaseOtput::Request &req beginner_tutorials::changeBaseOtput::Response &res
 
- * @return TRUE
+ * @return TRUE , Returns True to let know that the service has finished
 
  */
 bool changeString(beginner_tutorials::changeBaseOtput::Request &req,
@@ -36,9 +40,9 @@ bool changeString(beginner_tutorials::changeBaseOtput::Request &req,
   return true;
 }
 
-/**
- * This tutorial demonstrates simple sending of messages over the ROS system.
- */
+
+/// This tutorial demonstrates simple sending of messages over the ROS system.
+
 int main(int argc, char **argv) {
   /**
    * The ros::init() function needs to see argc and argv so that it can perform
@@ -83,11 +87,11 @@ int main(int argc, char **argv) {
   ros::ServiceServer service = n.advertiseService("changeString", changeString);
   /// Create Variable that takes care of loop frequency and initialize to default value
   int frequency = 1;
-  /// If node stated by the launch file recieves argument and pass to variable
+  /// If node stated by the launch file,recieves argument and pass to variable
   if (argc > 1) {
     frequency = atoi(argv[1]);
   }
-  /// If frequency different then default
+  /// If frequency different then default create the logging messages
   if (frequency != 1) {
     ROS_DEBUG_STREAM("Loop frequency changed to " << frequency);
     ROS_WARN_STREAM("Loop frequency different from Default");
@@ -97,14 +101,14 @@ int main(int argc, char **argv) {
     ROS_FATAL_STREAM("Invalid Loop frequency value ,it cannot be smaller then 1 , SYSTEM WILL BE SHUTDOWN");
     ros::shutdown();
   }
-  /// Maximun loop frequency accepted byt this node is 300
+  /// If frequency > 300 use default frequency and print logging messages
   if (frequency > 300) {
     ROS_ERROR_STREAM(
         "Maximun Loop Frequency allowed in this node is 300, Frequency will be set to Default ");
     frequency = 1;
     ROS_INFO_STREAM(" LOOP frequency set to " << frequency);
   }
-
+/// Set loop rate according to desired frequency
   ros::Rate loop_rate(frequency);
 
   /**

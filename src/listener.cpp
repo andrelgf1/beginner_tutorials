@@ -1,15 +1,14 @@
 /**
-
+ * Distributed under the BSD License (license terms found in LICENSE or at https://opensource.org/licenses/BSD-2-Clause
+ *
  * @file listener.hpp
-
+ *
  * @brief subscribing node listener.
-
+ *
  * @author Andre Ferreira
-
+ *
  * @copyright  Andre Ferreira
-
- * Distributed under the BSD License (license terms found in LICENSE or at https://www.freebsd.org/copyright/freebsd-license.html)
-
+ *
  */
 
 #include "ros/ros.h"
