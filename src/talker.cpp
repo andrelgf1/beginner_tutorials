@@ -12,28 +12,27 @@
 
  */
 
-
-
 #include <sstream>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "beginner_tutorials/changeBaseOtput.h"
 
-std::string baseString="Based String without change";
+extern std::string baseString = "Based String without change";
 /**
 
-    * @brief changeString function that changes the publishing node string in the topic 
-     
+ * @brief changeString function that changes the publishing node string in the topic 
+ 
 
-    * @param beginner_tutorials::changeBaseOtput::Request &req beginner_tutorials::changeBaseOtput::Response &res
+ * @param beginner_tutorials::changeBaseOtput::Request &req beginner_tutorials::changeBaseOtput::Response &res
 
-    * @return TRUE
+ * @return TRUE
 
-    */
+ */
 bool changeString(beginner_tutorials::changeBaseOtput::Request &req,
                   beginner_tutorials::changeBaseOtput::Response &res) {
+/// Set the input to the output and to the base string
   res.stringOutput = req.stringInput;
-  baseString = res.stringOutput;  // 13
+  baseString = res.stringOutput;
   return true;
 }
 
@@ -80,31 +79,29 @@ int main(int argc, char **argv) {
 
   ros::Publisher chatter_pub = n.advertise < std_msgs::String
       > ("chatter", 1000);
-  /// Create and advertise service over ROS 
+  /// Create and advertise service over ROS
   ros::ServiceServer service = n.advertiseService("changeString", changeString);
   /// Create Variable that takes care of loop frequency and initialize to default value
-  int frequency = 20;
-  /// If node stated by the launch file recieves argument and pass to variable 
+  int frequency = 1;
+  /// If node stated by the launch file recieves argument and pass to variable
   if (argc > 1) {
     frequency = atoi(argv[1]);
   }
-  /// If frequency different then default 
-  if (frequency != 20) {
+  /// If frequency different then default
+  if (frequency != 1) {
     ROS_DEBUG_STREAM("Loop frequency changed to " << frequency);
     ROS_WARN_STREAM("Loop frequency different from Default");
   }
   /// if frequency smaller or equal to 0 print shutdown system
   if (frequency <= 0) {
-    ROS_FATAL_STREAM(
-        argv[1]
-            << " is a invalid Loop frequency value ,it cannot be smaller then 1 , SYSTEM WILL BE SHUTDOWN");
+    ROS_FATAL_STREAM("Invalid Loop frequency value ,it cannot be smaller then 1 , SYSTEM WILL BE SHUTDOWN");
     ros::shutdown();
   }
-  ///Maximun loop frequency accepted byt this node is 300
+  /// Maximun loop frequency accepted byt this node is 300
   if (frequency > 300) {
     ROS_ERROR_STREAM(
         "Maximun Loop Frequency allowed in this node is 300, Frequency will be set to Default ");
-    frequency = 20;
+    frequency = 1;
     ROS_INFO_STREAM(" LOOP frequency set to " << frequency);
   }
 
@@ -123,8 +120,7 @@ int main(int argc, char **argv) {
     std::stringstream ss;
     ss << baseString << count;
     msg.data = ss.str();
-    ROS_INFO("%s", msg.data.c_str());
-
+    ROS_INFO_STREAM(msg.data.c_str());
     /**
      * The publish() function is how you send messages. The parameter
      * is the message object. The type of this object must agree with the type
