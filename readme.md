@@ -4,13 +4,13 @@
 ---
 
 ## Overview
-This projec is a brefly introduction to some ROS concepts and core components.
+This project is a briefly introduction to some ROS concepts and core components.
 The program creates two nodes, where one is the publisher while the other one 
 is the subscriber.The goal of this work is to show the behavior and the 
 interaction between this two nodes.
 The publisher is the node talker, which will continually broadcast a message in to the  topic and
-the subscriber listener will recieve this message. 
-This projec creates a service inside talker(publishing) node to change the string being published  at the topic. 
+the subscriber listener will receive this message. 
+This project creates a service inside talker(publishing) node to change the string being published  at the topic. 
 
 ## License
 
@@ -61,9 +61,10 @@ Build Project in Catkin Workspace
  catkin_make
 ```
 
-## How to run each node separatly
+## How to run each node separately
 
 once your environment is set
+
 open the terminal and initialize the master
  
 ```
@@ -89,6 +90,7 @@ In a new terminal, lets run the Subscriber listener
 
 In order to Run both nodes at the same time, it is possible to use
 the launch file.
+
 There is no need to initialize the master.
 
 Inside catkin workspace
@@ -100,8 +102,8 @@ roslaunch beginner_tutorials launch2Nodes.launch
 ```
 ### Running nodes changing the publishing frequency
 
-If the user desrires to change the publishing rate in the topic
-Run the nodes using the launch file passing asargument the desired frequency
+If the user desires to change the publishing rate in the topic,
+Run the nodes using the launch file passing as argument the desired frequency
 
 ```
 source devel/setup.bash
@@ -110,7 +112,8 @@ roslaunch beginner_tutorials launch2Nodes.launch frequency:=<frequency_argument_
 ```
 ### Calling service to Change Base String
 
-This service changes the base string which is being published by the talker node. 
+This service changes the base string which is being published by the talker node.
+ 
 With both nodes Running
 
 Open new Terminal
