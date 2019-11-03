@@ -17,7 +17,7 @@
 #include "std_msgs/String.h"
 #include "beginner_tutorials/changeBaseOtput.h"
 /// Define string Variable to be published at the topic
-extern std::string baseString = "Based String without change";
+extern std::string baseString = "Base String without change";
 /**
 
  * @brief changeString service function that changes the publishing node string in the topic 
