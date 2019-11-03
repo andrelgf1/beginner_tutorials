@@ -1,5 +1,4 @@
 /**
-
  * Distributed under the BSD License (license terms found in LICENSE or at https://opensource.org/licenses/BSD-2-Clause)
  *
  * @file talker.hpp
