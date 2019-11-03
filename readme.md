@@ -87,6 +87,10 @@ In a new terminal, lets run the Subscriber listener
 ```
 ## How to run nodes using launch file
 
+In order to Run both nodes at the same time, it is possible to use
+the launch file.
+There is no need to initialize the master.
+
 Inside catkin workspace
 
 ```
@@ -96,12 +100,17 @@ roslaunch beginner_tutorials launch2Nodes.launch
 ```
 ### Running nodes changing the publishing frequency
 
+If the user desrires to change the publishing rate in the topic
+Run the nodes using the launch file passing asargument the desired frequency
+
 ```
 source devel/setup.bash
 roslaunch beginner_tutorials launch2Nodes.launch frequency:=<frequency_argument_here>
 
 ```
 ### Calling service to Change Base String
+
+This service changes the base string which is being published by the talker node. 
 With both nodes Running
 
 Open new Terminal
