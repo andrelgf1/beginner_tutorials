@@ -1,5 +1,5 @@
 <launch>
-<arg  name  ="frequency" default = "20" />
+<arg  name  ="frequency" default = "1" />
   
  <node
 
