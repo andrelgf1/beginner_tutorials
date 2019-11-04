@@ -21,6 +21,8 @@ generate_messages(
   std_msgs
 )
 
+add_compile_options(-std=c++11)
+
 catkin_package()
 
 
