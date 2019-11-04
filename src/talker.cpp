@@ -10,11 +10,12 @@
  * @copyright  Andre Ferreira
  *
  */
-
+#include <string>
 #include <sstream>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "beginner_tutorials/changeBaseOtput.h"
+
 /// Define string Variable to be published at the topic
 extern std::string baseString = "Base String without change";
 /**
@@ -88,7 +89,7 @@ int main(int argc, char **argv) {
   int frequency = 1;
   /// If node stated by the launch file,recieves argument and pass to variable
   if (argc > 1) {
-    frequency = atoi(argv[1]);
+    frequency = std::stoi(argv[1]);
   }
   /// If frequency different then default create the logging messages
   if (frequency != 1) {
