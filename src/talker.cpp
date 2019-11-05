@@ -10,11 +10,13 @@
  * @copyright  Andre Ferreira
  *
  */
+#include <tf/transform_broadcaster.h>
 #include <string>
 #include <sstream>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "beginner_tutorials/changeBaseOtput.h"
+
 
 /// Define string Variable to be published at the topic
 extern std::string baseString = "Base String without change";
@@ -111,6 +113,11 @@ int main(int argc, char **argv) {
 /// Set loop rate according to desired frequency
   ros::Rate loop_rate(frequency);
 
+  static tf::TransformBroadcaster br;
+  tf::Transform transform;
+  transform.setOrigin(tf::Vector3(1.0, 1.0, 1.0) );
+  tf::Quaternion q;
+
   /**
    * A count of how many messages we have sent. This is used to create
    * a unique string for each message.
@@ -132,6 +139,9 @@ int main(int argc, char **argv) {
      * in the constructor above.
      */
     chatter_pub.publish(msg);
+    q.setRPY(count, (count+1), (count+2));
+    transform.setRotation(q);
+    br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world", "talkWithFrame"));
 
     ros::spinOnce();
 
