@@ -112,10 +112,13 @@ int main(int argc, char **argv) {
   }
 /// Set loop rate according to desired frequency
   ros::Rate loop_rate(frequency);
-
+/// Create a TransformBroadcaster object that is use to send transformartions
   static tf::TransformBroadcaster br;
+/// Create a transform object
   tf::Transform transform;
+/// Set translation vector
   transform.setOrigin(tf::Vector3(1.0, 1.0, 1.0) );
+/// Orientation /vector
   tf::Quaternion q;
 
   /**
@@ -139,8 +142,10 @@ int main(int argc, char **argv) {
      * in the constructor above.
      */
     chatter_pub.publish(msg);
+/// Set rotation
     q.setRPY(count, (count+1), (count+2));
     transform.setRotation(q);
+/// Brodcasting the Transform
     br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world", "talkWithFrame"));
 
     ros::spinOnce();
