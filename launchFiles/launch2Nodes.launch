@@ -1,5 +1,6 @@
 <launch>
 <arg  name  ="frequency" default = "1" />
+<arg  name  ="record" default = "disable"/>
   
  <node
 
@@ -18,7 +19,7 @@
 
   />
 
-  <node
+ <node
 
     name = "subscriber"
 
@@ -29,6 +30,20 @@
     output = "screen"
 
     launch-prefix = "gnome-terminal -e"
+
+   />
+
+<node
+
+    name = "rosbag"
+
+    pkg = "rosbag"
+
+    type = "record"
+
+    args = "-a -O $(find beginner_tutorials)/results/recorded.bag"
+
+    if = "$(eval record == 'enable')"
 
    />
 
