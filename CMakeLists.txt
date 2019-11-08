@@ -60,8 +60,6 @@ if(CATKIN_ENABLE_TESTING)
 
     testTalkerNode
 
-    test/test.launch
-
     talker
 
     listener
