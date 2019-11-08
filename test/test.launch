@@ -1,0 +1,23 @@
+<launch>
+
+  <node 
+  
+  name="publisher"
+
+  pkg="beginner_tutorials"
+
+  type="talker" 
+
+  />
+
+  <test 
+
+  pkg="beginner_tutorials" 
+
+  test-name="testTalkerNode"
+  
+  type="testTalkerNode" 
+
+  />
+
+</launch>
