@@ -10,7 +10,8 @@ is the subscriber.The goal of this work is to show the behavior and the
 interaction between this two nodes.
 The publisher is the node talker, which will continually broadcast a message in to the  topic and
 the subscriber listener will receive this message. 
-This project creates a service inside talker(publishing) node to change the string being published  at the topic. 
+This project also creates a service inside talker(publishing) node to change the string being published  at the topic.
+The final task made by this work is creating a broadcast tf frame in the talker node, where it's frames are called talkWithFrame and World. 
 
 ## License
 
@@ -110,7 +111,7 @@ source devel/setup.bash
 roslaunch beginner_tutorials launch2Nodes.launch frequency:=<frequency_argument_here>
 
 ```
-### Calling service to Change Base String
+## Calling service to Change Base String
 
 This service changes the base string which is being published by the talker node.
  
@@ -124,6 +125,141 @@ source devel/setup.bash
 rosservice call /changeString "stringInput: '<New_desired_string_here>'"
 
 ```
+## Inspecting TF frames
+
+The TF broadcaster, inside talker node, is broascasting the transformation between the World frame to talkWithFrame frame. The orientation of the of talkWithFrame with respect to the world frames varies with the time , however the translation is kept the same.
+In order to check the transformation we can use the "tf_echo" tool.
+Before running the command this tool, is necessary to run the talker node and for that you can use any of the methods previously mentioned in this file.
+
+In a new terminal 
+
+```
+rosrun tf tf_echo /world /talkWithFrame
+
+```
+
+To visualize the two frames in a graph form:
+
+```
+rosrun rqt_tf_tree rqt_tf_tree
+
+```
+
+To generate a pdf file with a similar tree graph
+
+```
+rosrun tf view_frames
+
+```
+
+In order to check this generated pdf  
+
+
+```
+rosrun tf view_frames
+
+```
+
+## running rostest
+
+There is one test in this project, which consists in verifying if the service is being called properly and that the the stringOutput matchs the stringInput.
+
+To build the code and run the test at the same time 
+
+```
+cd ~/catkin_ws
+catkin_make run_tests_beginner_tutorials
+
+```
+
+If the code is already compiled , it is possible to run the test independly
+
+```
+cd ~/catkin_ws
+source devel/setup.bash
+rostest beginner_tutorials test.launch
+
+```
+
+Another way of running the test 
+
+The talker node needs to be running
+
+```
+rosrun beginner_tutorials testTalkerNode
+
+```
+
+## Recording bag files with the launch file
+
+This section uses the launch file to activate the recording of  the topic data from a running ROS system, and will accumulate the data in a bag file.
+The bag file called recorded.bag will be saved at the "results" folder.
+In order to record the topics of the system, run the launch file passing the argument "enable"
+
+```
+cd ~/catkin_ws
+source devel/setup.bash
+roslaunch beginner_tutorials launch2Nodes.launch record:=enable
+
+```
+
+If it is not desired recording the topics just Run the launch file without the argument record
+
+```
+cd ~/catkin_ws
+source devel/setup.bash
+roslaunch beginner_tutorials launch2Nodes.launch 
+
+```
+or 
+
+pass "disable" to the argument record 
+
+```
+cd ~/catkin_ws
+source devel/setup.bash
+roslaunch beginner_tutorials launch2Nodes.launch record:=disable
+
+```
+
+## Inspecting the bag file
+
+To inspect the recorded.bag , to check the details of what was recorded.
+
+```
+cd ~/catkin_ws
+cd src/beginner_tutorials/results/
+rosbag info recorded.bag
+
+```
+
+## Playing the recorded bag
+
+To play the recorded bag and visualize part of what was recorded , we need first run the listener node.
+
+Make sure talker node is not running 
+
+```
+cd ~/catkin_ws
+source devel/setup.bash
+rosrun beginner_tutorials listener
+
+```
+
+After running listener node, play the recorded bag
+
+```
+cd ~/catkin_ws
+cd src/beginner_tutorials/results/
+rosbag play recorded.bag
+
+```
+Open the terminal where the listener node is running and it will be possible to visualize all the messages recorded at the topic /chatter.
+
+
+
+
+
 
 
 
