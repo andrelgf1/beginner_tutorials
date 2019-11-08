@@ -85,24 +85,30 @@ int main(int argc, char **argv) {
 
   ros::Publisher chatter_pub = n.advertise < std_msgs::String
       > ("chatter", 1000);
+
   /// Create and advertise service over ROS
   ros::ServiceServer service = n.advertiseService("changeString", changeString);
+
   /// Create Variable that takes care of loop frequency and initialize to default value
   int frequency = 1;
+
   /// If node stated by the launch file,recieves argument and pass to variable
   if (argc > 1) {
     frequency = std::stoi(argv[1]);
   }
+
   /// If frequency different then default create the logging messages
   if (frequency != 1) {
     ROS_DEBUG_STREAM("Loop frequency changed to " << frequency);
     ROS_WARN_STREAM("Loop frequency different from Default");
   }
+
   /// if frequency smaller or equal to 0 print shutdown system
   if (frequency <= 0) {
     ROS_FATAL_STREAM("Invalid Loop frequency value ,it cannot be smaller then 1 , SYSTEM WILL BE SHUTDOWN");
     ros::shutdown();
   }
+
   /// If frequency > 300 use default frequency and print logging messages
   if (frequency > 300) {
     ROS_ERROR_STREAM(
@@ -110,14 +116,19 @@ int main(int argc, char **argv) {
     frequency = 1;
     ROS_INFO_STREAM(" LOOP frequency set to " << frequency);
   }
+
 /// Set loop rate according to desired frequency
   ros::Rate loop_rate(frequency);
+
 /// Create a TransformBroadcaster object that is use to send transformartions
   static tf::TransformBroadcaster br;
+
 /// Create a transform object
   tf::Transform transform;
+
 /// Set translation vector
   transform.setOrigin(tf::Vector3(1.0, 1.0, 1.0) );
+
 /// Orientation /vector
   tf::Quaternion q;
 
@@ -126,6 +137,7 @@ int main(int argc, char **argv) {
    * a unique string for each message.
    */
   int count = 0;
+
   while (ros::ok()) {
     /**
      * This is a message object. You stuff it with data, and then publish it.
@@ -135,6 +147,7 @@ int main(int argc, char **argv) {
     ss << baseString << count;
     msg.data = ss.str();
     ROS_INFO_STREAM(msg.data.c_str());
+
     /**
      * The publish() function is how you send messages. The parameter
      * is the message object. The type of this object must agree with the type
@@ -142,9 +155,11 @@ int main(int argc, char **argv) {
      * in the constructor above.
      */
     chatter_pub.publish(msg);
+
 /// Set rotation
     q.setRPY(count, (count+1), (count+2));
     transform.setRotation(q);
+
 /// Brodcasting the Transform
     br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world", "talkWithFrame"));
 
