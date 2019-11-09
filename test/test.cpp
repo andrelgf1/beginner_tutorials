@@ -30,6 +30,9 @@ TEST(TESTSuite, testChangeString) {
 /// creating handle of the node
   ros::NodeHandle nh;
 
+/// Waiting for the service to be available
+  ros::service::waitForService("changeString");
+
 /// Creating a service client for the service
   ros::ServiceClient client = nh.serviceClient
       < beginner_tutorials::changeBaseOtput > ("changeString");
