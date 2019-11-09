@@ -62,8 +62,7 @@ if(CATKIN_ENABLE_TESTING)
 
     talker
 
-    listener
-
+    
     ${catkin_EXPORTED_TARGETS}
 
   )
