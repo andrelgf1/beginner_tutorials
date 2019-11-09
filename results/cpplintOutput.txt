@@ -1,9 +1,12 @@
-./src/talker.cpp:35:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::changeBaseOtput::Request &req  [runtime/references] [2]
-./src/talker.cpp:36:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::changeBaseOtput::Response &res  [runtime/references] [2]
-./src/talker.cpp:88:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
-./src/talker.cpp:101:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
-./src/talker.cpp:107:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./src/talker.cpp:37:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::changeBaseOtput::Request &req  [runtime/references] [2]
+./src/talker.cpp:38:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::changeBaseOtput::Response &res  [runtime/references] [2]
+./src/talker.cpp:92:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./src/talker.cpp:108:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./src/talker.cpp:115:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./src/talker.cpp:164:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
 Done processing ./src/talker.cpp
 Done processing ./src/listener.cpp
-Total errors found: 5
+Done processing ./test/main.cpp
+Done processing ./test/test.cpp
+Total errors found: 6
 
