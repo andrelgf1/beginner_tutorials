@@ -134,7 +134,7 @@ Before running the command this tool, is necessary to run the talker node and fo
 In a new terminal 
 
 ```
-rosrun tf tf_echo /world /talkWithFrame
+rosrun tf tf_echo /world /talk
 
 ```
 
@@ -156,7 +156,7 @@ In order to check this generated pdf
 
 
 ```
-rosrun tf view_frames
+evince frames.pdf
 
 ```
 
@@ -186,6 +186,8 @@ Another way of running the test
 The talker node needs to be running
 
 ```
+cd ~/catkin_ws
+source devel/setup.bash
 rosrun beginner_tutorials testTalkerNode
 
 ```
