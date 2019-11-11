@@ -161,7 +161,7 @@ int main(int argc, char **argv) {
     transform.setRotation(q);
 
 /// Brodcasting the Transform
-    br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world", "talkWithFrame"));
+    br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world", "talk"));
 
     ros::spinOnce();
 
