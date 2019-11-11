@@ -11,7 +11,7 @@ interaction between this two nodes.
 The publisher is the node talker, which will continually broadcast a message in to the  topic and
 the subscriber listener will receive this message. 
 This project also creates a service inside talker(publishing) node to change the string being published  at the topic.
-The final task made by this work is creating a broadcast tf frame in the talker node, where it's frames are called talkWithFrame and World. 
+The final task made by this work is creating a broadcast tf frame in the talker node, where it's frames are called /talk and /World. 
 
 ## License
 
